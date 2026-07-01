@@ -102,6 +102,6 @@ git push origin v$(cat VERSION)
 ```
 
 The [`release`](.github/workflows/release.yml) workflow checks the tag against `VERSION`, runs
-[`tools/build-release.py`](tools/build-release.py) (compiles the single file + SHA-256 sidecar),
-verifies integrity with `--verify`, and uploads both assets to the GitHub Release. To build locally
-for inspection, run `tools/build-release.py` (output lands in the git-ignored `dist/`).
+[`tools/build-release.py`](tools/build-release.py) (compiles the single file + SHA-256 sidecar,
+which are consistent by construction), and uploads both assets to the GitHub Release. To build
+locally for inspection, run `tools/build-release.py` (output lands in the git-ignored `dist/`).
