@@ -1,0 +1,52 @@
+name: release
+
+# Build the compiled FCP spec from source and publish it as a GitHub Release
+# whenever a version tag (e.g. v0.1.0) is pushed. The release assets — the
+# single-file spec and its SHA-256 sidecar — are the immutable, version-pinned
+# artifacts adopters vendor and pin against. dist/ is not tracked in the repo.
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write  # required to create the release and upload assets
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify tag matches VERSION
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          ver="$(cat VERSION)"
+          if [ "$tag" != "$ver" ]; then
+            echo "::error::Tag v$tag does not match VERSION file ($ver). Bump VERSION or fix the tag."
+            exit 1
+          fi
+          echo "Building release for v$ver"
+
+      - name: Build release
+        # A single build writes fcp-<version>.md and its .sha256 sidecar together,
+        # so the file and its hash are consistent by construction. (We don't run a
+        # second `--verify` build here: build-release.py stamps a `built:` timestamp
+        # inside the hashed content, so a separate rebuild is non-reproducible.)
+        run: python3 tools/build-release.py
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/fcp-*.md
+            dist/fcp-*.md.sha256
+          fail_on_unmatched_files: true
+          generate_release_notes: true

@@ -17,7 +17,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CANONICAL_SOURCE = "https://github.com/<owner>/federated-context-protocol"  # set on first release
+CANONICAL_SOURCE = "https://github.com/KevinT/federatedcontextprotocol"  # canonical repo
 
 
 def build() -> tuple[str, str]:

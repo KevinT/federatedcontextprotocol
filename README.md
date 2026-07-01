@@ -59,9 +59,49 @@ One writer per stream (no merge conflicts), global ID as the folder name, and a 
 
 1. Read [SPEC.md](SPEC.md) and [CONFORMANCE.md](CONFORMANCE.md).
 2. Copy [`templates/root-skeleton/`](templates/root-skeleton/) to a new private repo — that's your root.
-3. **Pin the protocol:** vendor the compiled release (`dist/fcp-<version>.md`) into your root's `.fcp/`, add a `.fcp/lock.json` (see [`templates/fcp-lock.json`](templates/fcp-lock.json)) with the version + SHA-256, and declare `fcp: "<version>"` in your root manifest. Pin a version; never track latest.
+3. **Pin the protocol:** download the compiled release for the version you're adopting from [GitHub Releases](https://github.com/KevinT/federatedcontextprotocol/releases) (`fcp-<version>.md` + `.sha256`), verify the hash, and vendor the file into your root's `.fcp/`. Add a `.fcp/lock.json` (see [`templates/fcp-lock.json`](templates/fcp-lock.json)) with the version + SHA-256, and declare `fcp: "<version>"` in your root manifest. Pin a version; never track latest. See [Consuming the spec](#consuming-the-spec) for the exact commands.
 4. Create a domain repo per audience. Add the [`templates/gitignore.template`](templates/gitignore.template).
 5. Use [`tools/fold.py`](tools/fold.py) to fold `events.jsonl` → `state.md`.
 6. Share a domain by adding collaborators to that repo — never by moving files.
 
-Maintainers build a release with [`tools/build-release.py`](tools/build-release.py) (compiles the single file + SHA-256 sidecar; `--verify` re-checks integrity).
+## Consuming the spec
+
+The compiled spec is **not tracked in this repo** — it's a build artifact published to
+[GitHub Releases](https://github.com/KevinT/federatedcontextprotocol/releases). Each release
+carries two immutable, version-pinned assets: `fcp-<version>.md` (the self-contained spec) and
+`fcp-<version>.md.sha256` (its integrity anchor). Pull the exact version you're adopting, verify
+it, then vendor it into your repo:
+
+```sh
+VER=0.1.0
+BASE="https://github.com/KevinT/federatedcontextprotocol/releases/download/v${VER}"
+
+curl -fLO "${BASE}/fcp-${VER}.md"
+curl -fLO "${BASE}/fcp-${VER}.md.sha256"
+
+# Verify integrity before trusting the file
+shasum -a 256 -c "fcp-${VER}.md.sha256"   # macOS
+# sha256sum -c "fcp-${VER}.md.sha256"      # Linux
+
+# Vendor the verified file into your root, then pin it in .fcp/lock.json
+mkdir -p .fcp && cp "fcp-${VER}.md" .fcp/
+```
+
+Always pin a specific version — do the gap review against a fixed file, then commit that file into
+your repo. Don't fetch a mutable "latest"; upgrading is a deliberate step (bump `VER`, re-verify,
+re-review).
+
+## Releasing (maintainers)
+
+Releases are built and published automatically. Bump [`VERSION`](VERSION), commit, then push a
+matching tag:
+
+```sh
+git tag v$(cat VERSION)
+git push origin v$(cat VERSION)
+```
+
+The [`release`](.github/workflows/release.yml) workflow checks the tag against `VERSION`, runs
+[`tools/build-release.py`](tools/build-release.py) (compiles the single file + SHA-256 sidecar),
+verifies integrity with `--verify`, and uploads both assets to the GitHub Release. To build locally
+for inspection, run `tools/build-release.py` (output lands in the git-ignored `dist/`).
