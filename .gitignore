@@ -1,4 +1,4 @@
-# Compiled release artifacts — built from source, published to GitHub Releases,
+# Compiled release artifacts - built from source, published to GitHub Releases,
 # not tracked here. Build locally with tools/build-release.py.
 dist/
 

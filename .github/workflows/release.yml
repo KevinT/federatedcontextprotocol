@@ -1,8 +1,8 @@
 name: release
 
 # Build the compiled FCP spec from source and publish it as a GitHub Release
-# whenever a version tag (e.g. v0.1.0) is pushed. The release assets — the
-# single-file spec and its SHA-256 sidecar — are the immutable, version-pinned
+# whenever a version tag (e.g. v0.1.0) is pushed. The release assets - the
+# single-file spec and its SHA-256 sidecar - are the immutable, version-pinned
 # artifacts adopters vendor and pin against. dist/ is not tracked in the repo.
 
 on:

@@ -10,7 +10,7 @@ current_goals:
   Q3-2026: "Lead with more delegation; stop holding every thread myself"
 ---
 
-# Current state — kevint@gmail.com
+# Current state - kevint@gmail.com
 
 *Folded view for audience `mentorship`. Source of truth is `events.jsonl`.*
 
@@ -18,5 +18,5 @@ current_goals:
 - **Q3-2026:** Lead with more delegation; stop holding every thread myself
 
 ## Recent
-- `2026-06-29` **reflection.recorded** — Noticed I re-absorbed a workstream I had delegated. Want to unpack the trigger with mentor.
+- `2026-06-29` **reflection.recorded** - Noticed I re-absorbed a workstream I had delegated. Want to unpack the trigger with mentor.
 

@@ -6,7 +6,7 @@ date: 2026-06-30
 editor: kevint@gmail.com
 ---
 
-# 0002 — Distribute FCP as a single hashable file, vendored and pinned by adopters
+# 0002 - Distribute FCP as a single hashable file, vendored and pinned by adopters
 
 ## Context
 
@@ -20,10 +20,10 @@ Adopters (a personal root, a domain repo, an organisation's context repository) 
 
 ## Consequences
 
-- The rules travel with the repo (offline, isolated mounts) — consistent with the protocol's own "crossing only by copy" — and conformance becomes reproducible and auditable.
+- The rules travel with the repo (offline, isolated mounts) - consistent with the protocol's own "crossing only by copy" - and conformance becomes reproducible and auditable.
 - A SHA-256 mismatch is a tamper/drift signal that must be surfaced (the "divergence surfaced" principle applied to the protocol itself).
 - The protocol distributes itself the way it asks capabilities to be promoted: published upstream, pulled and adopted downstream when ready.
-- Vendoring an immutable, pinned version does not violate "point at systems of record, don't copy" — that rule governs *mutable* data; a frozen release cannot drift.
+- Vendoring an immutable, pinned version does not violate "point at systems of record, don't copy" - that rule governs *mutable* data; a frozen release cannot drift.
 
 ## Alternatives considered
 

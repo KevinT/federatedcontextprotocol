@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-build-release.py — compile FCP source into a single, hashable release file.
+build-release.py - compile FCP source into a single, hashable release file.
 
 The repo is the source; a release is one immutable file per version,
 `dist/fcp-<version>.md`, containing the full normative spec (SPEC.md) with the
@@ -27,7 +27,7 @@ def build() -> tuple[str, str]:
 
     built = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     header = (
-        f"<!-- FCP compiled release — DO NOT EDIT. Built from source.\n"
+        f"<!-- FCP compiled release - DO NOT EDIT. Built from source.\n"
         f"     version: {version}\n"
         f"     source:  {CANONICAL_SOURCE}\n"
         f"     built:   {built}\n"
@@ -35,7 +35,7 @@ def build() -> tuple[str, str]:
     )
     appendix = (
         "\n\n---\n\n"
-        "## Appendix A — Event envelope schema (normative)\n\n"
+        "## Appendix A - Event envelope schema (normative)\n\n"
         "The canonical JSON Schema for `events.jsonl` lines (SPEC §4.7). This is embedded here so the\n"
         "release file is self-contained and the hash covers the schema too.\n\n"
         "```json\n" + schema + "\n```\n"
@@ -69,7 +69,7 @@ def main() -> int:
         print(f"recorded:  {recorded}")
         print(f"on-disk:   {on_disk}")
         print(f"rebuilt:   {rebuilt}")
-        print("OK — integrity verified" if ok else "MISMATCH — file/sidecar/source disagree")
+        print("OK - integrity verified" if ok else "MISMATCH - file/sidecar/source disagree")
         return 0 if ok else 2
 
     dist.mkdir(exist_ok=True)

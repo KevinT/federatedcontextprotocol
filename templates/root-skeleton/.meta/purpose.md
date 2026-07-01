@@ -1,4 +1,4 @@
-# Purpose — Root
+# Purpose - Root
 
 This repository is the **apex (root)** of my federation. It is private to me and almost never mounted: I open it only for integrative reflection across all my parts.
 

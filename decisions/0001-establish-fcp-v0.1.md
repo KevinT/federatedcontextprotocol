@@ -6,7 +6,7 @@ date: 2026-06-30
 editor: kevint@gmail.com
 ---
 
-# 0001 — Establish FCP v0.1
+# 0001 - Establish FCP v0.1
 
 ## Context
 

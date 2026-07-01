@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-fold.py — FCP reference fold tool (SPEC §7).
+fold.py - FCP reference fold tool (SPEC §7).
 
 Folds an append-only events.jsonl into a human + machine readable state.md.
 Applies audience gating: when a --destination is given, only events whose
@@ -74,7 +74,7 @@ def fold(events: list[dict], destination: str | None) -> dict:
 
 def render(source: str, destination: str | None, state: dict, kept: list[dict]) -> str:
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    last_ts = kept[-1]["ts"] if kept else "—"
+    last_ts = kept[-1]["ts"] if kept else "-"
     aud = destination or "self"
     fm = [
         "---",
@@ -92,7 +92,7 @@ def render(source: str, destination: str | None, state: dict, kept: list[dict]) 
             fm.append(f"  {horizon}: {json.dumps(goal)}")
     fm.append("---")
 
-    body = [f"# Current state — {source}", "",
+    body = [f"# Current state - {source}", "",
             f"*Folded view for audience `{aud}`. Source of truth is `events.jsonl`.*", ""]
     if state["current_goals"]:
         body.append("## Goals")
@@ -106,7 +106,7 @@ def render(source: str, destination: str | None, state: dict, kept: list[dict]) 
             t = e.get("type", "")
             p = e.get("payload", {})
             summary = p.get("note") or p.get("why") or p.get("event") or json.dumps(p)
-            body.append(f"- `{e['ts'][:10]}` **{t}** — {summary}")
+            body.append(f"- `{e['ts'][:10]}` **{t}** - {summary}")
         body.append("")
     return "\n".join(fm + [""] + body) + "\n"
 
