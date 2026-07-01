@@ -1,0 +1,25 @@
+# FCP default-deny commit policy (SPEC §8).
+# Everything is local data until explicitly promoted to a committed "map movement".
+# Promotion is a deliberate, reviewable act: add a `!` line for each path you choose to share.
+
+# 1. Deny everything by default.
+*
+
+# 2. Always keep the structure and policy files.
+!.gitignore
+!meta.json
+!.meta/
+!.meta/**
+
+# 3. Promote folded views (the shareable map movements), but NOT raw logs.
+#    In a SHARED repo, commit only the gated state.md; keep events.jsonl local.
+!event-stream/
+!event-stream/*/
+!event-stream/*/state.md
+
+# 4. In a PRIVATE repo only, you may also promote your own raw logs.
+#    Uncomment per source as appropriate:
+# !event-stream/<your-id>/events.jsonl
+
+# 5. System-of-record feeds (HR system, calendar, …) stay denied — re-pull on demand.
+#    Do not add `!` lines for them.

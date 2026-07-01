@@ -1,0 +1,4 @@
+{"ts":"2026-06-28T09:00:00Z","id":"01J0AAA0000000000000000001","source":"kevint@gmail.com","type":"goal.set","audience":["mentorship","root"],"payload":{"goal":"Lead with more delegation; stop holding every thread myself","horizon":"Q3-2026"},"v":1}
+{"ts":"2026-06-29T16:30:00Z","id":"01J0AAA0000000000000000002","source":"kevint@gmail.com","type":"reflection.recorded","audience":["mentorship"],"payload":{"note":"Noticed I re-absorbed a workstream I had delegated. Want to unpack the trigger with mentor."},"v":1}
+{"ts":"2026-06-30T08:15:00Z","id":"01J0AAA0000000000000000003","source":"kevint@gmail.com","type":"link.shared","audience":["the-circle"],"payload":{"url":"https://example.com/essay-on-attention","why":"Reframed how I think about focus debt"},"v":1}
+{"ts":"2026-06-30T08:20:00Z","id":"01J0AAA0000000000000000004","source":"kevint@gmail.com","type":"lifeevent.recorded","audience":["family","the-circle"],"payload":{"event":"Booked the August family trip"},"v":1}

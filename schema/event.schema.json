@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://federated-context-protocol.org/schema/event.schema.json",
+  "title": "FCP Event Envelope",
+  "description": "One line of an events.jsonl stream. See SPEC.md §6.1.",
+  "type": "object",
+  "required": ["ts", "id", "source", "type", "payload", "v"],
+  "additionalProperties": false,
+  "properties": {
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp of when the event occurred."
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Globally unique event ID, e.g. a ULID."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The <source-id> that emitted this event (email, DID, or stable system name)."
+    },
+    "type": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9]+)+$",
+      "description": "Dotted event type, e.g. goal.set, role.changed, link.shared, lifeevent.recorded."
+    },
+    "audience": {
+      "description": "Optional gating hint: which destination(s) this event may be folded into. A string, list of strings, or 'self' for owner-only.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+      ]
+    },
+    "payload": {
+      "type": "object",
+      "description": "Type-specific body. Shape is defined per event type by the implementation."
+    },
+    "prov": {
+      "type": "object",
+      "description": "Optional provenance (e.g. tool, commit, upstream source).",
+      "additionalProperties": true
+    },
+    "v": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Envelope schema version."
+    }
+  }
+}

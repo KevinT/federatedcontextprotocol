@@ -1,0 +1,8 @@
+{
+  "_comment": "Adopter vendor lock. Place at .fcp/lock.json in the adopting repo, alongside the vendored .fcp/fcp-<version>.md. Verify the vendored file's SHA-256 against `sha256` here; a mismatch means tampering or drift and must be surfaced. Pin a specific version; never track 'latest'.",
+  "fcp": "0.1.0",
+  "source": "https://github.com/<owner>/federated-context-protocol",
+  "artifact": ".fcp/fcp-0.1.0.md",
+  "sha256": "8ace8cc10e495a875faf497fa41fc385e6790166f90efae7a56d8920e541a505",
+  "adopted_at": "2026-06-30T00:00:00Z"
+}

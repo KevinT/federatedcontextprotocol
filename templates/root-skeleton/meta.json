@@ -1,0 +1,11 @@
+{
+  "fcp": "0.1",
+  "node_type": "root",
+  "owner": "you@example.com",
+  "description": "Private apex of this federation. Almost never mounted. Holds deepest goals and the integrative view.",
+  "domains": [
+    { "name": "Work",     "repo": "https://github.com/you/work-context",     "audience": "private" },
+    { "name": "Mentorship", "repo": "https://github.com/you/mentorship-context", "audience": "shared:mentor" },
+    { "name": "Family",   "repo": "https://github.com/you/family-context",   "audience": "shared:family" }
+  ]
+}
